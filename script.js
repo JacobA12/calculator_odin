@@ -28,6 +28,13 @@ function appendNumber(number) {
   currentOperationScreen.textContent += number;
 }
 
+function setOperation(newOperation){
+  if (currentOperation === null) {
+    currentOperation = newOperation;
+    currentOperationScreen.textContent += newOperation;
+  }
+}
+
 function appendPoint() {
   if (currentOperationScreen.textContent.toString().includes('.')) {
     return;
@@ -36,7 +43,10 @@ function appendPoint() {
 }
 
 function clear(){
-  currentOperationScreen.textContent = '0';
+  currentOperationScreen.textContent = '';
+  currentOperation = null;
+  firstOperand = "";
+  secondOperand ="";
 }
 
 function deleteNumber(){
@@ -52,7 +62,7 @@ function add(a, b) {
   return a + b;
 }
 
-function substract(a, b) {
+function subtract(a, b) {
   return a - b;
 }
 
@@ -64,4 +74,25 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(operator, a, b) {}
+function operate(operator, a, b) {
+  switch (currentOperation) {
+    case '*':
+      currentOperationScreen.textContent = multiply(a,b);
+      break;
+    case '+':
+      currentOperationScreen.textContent = add(a,b);
+      break;
+    case '-':
+      currentOperationScreen.textContent = subtract(a,b);
+      break;
+    case '/':
+      if (b === 0) {
+        currentOperationScreen.textContent = "Cant divide by 0";
+        clear();
+      }
+      currentOperationScreen.textContent = divide(a,b);
+      break;
+    default:
+      break;
+  }
+}
