@@ -33,8 +33,8 @@ body {
   margin-left: 20px;
 }
 
-.button {
-  flex: 1 0 25%; /* buttons take up 25% of the container width */
+.btn {
+  flex: 1 0 25%;
   margin: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -47,6 +47,7 @@ body {
   background-color: #d4d4d4;
 }
 
-#fun-button{
+#clear-button,
+#del-button {
   width: 70px;
 }
