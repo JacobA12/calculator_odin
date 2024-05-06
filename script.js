@@ -15,6 +15,10 @@ const currentOperationScreen = document.getElementById(
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 pointButton.addEventListener("click", appendPoint);
+equalsButton.addEventListener(
+  "click",
+  operate(currentOperation, firstOperand, secondOperand)
+);
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -28,30 +32,33 @@ function appendNumber(number) {
   currentOperationScreen.textContent += number;
 }
 
-function setOperation(newOperation){
+function setOperation(newOperation) {
   if (currentOperation === null) {
+    firstOperand = currentOperationScreen.textContent;
     currentOperation = newOperation;
     currentOperationScreen.textContent += newOperation;
   }
 }
 
 function appendPoint() {
-  if (currentOperationScreen.textContent.toString().includes('.')) {
+  if (currentOperationScreen.textContent.toString().includes(".")) {
     return;
   }
-  currentOperationScreen.textContent += '.';
+  currentOperationScreen.textContent += ".";
 }
 
-function clear(){
-  currentOperationScreen.textContent = '';
+function clear() {
+  currentOperationScreen.textContent = "";
   currentOperation = null;
   firstOperand = "";
-  secondOperand ="";
+  secondOperand = "";
 }
 
-function deleteNumber(){
-  if (currentOperationScreen.textContent !== '0') {
-    currentOperationScreen.textContent = currentOperationScreen.textContent.toString().slice(0, -1);
+function deleteNumber() {
+  if (currentOperationScreen.textContent !== "0") {
+    currentOperationScreen.textContent = currentOperationScreen.textContent
+      .toString()
+      .slice(0, -1);
   }
   return;
 }
@@ -76,21 +83,21 @@ function divide(a, b) {
 
 function operate(operator, a, b) {
   switch (currentOperation) {
-    case '*':
-      currentOperationScreen.textContent = multiply(a,b);
+    case "*":
+      currentOperationScreen.textContent = multiply(a, b);
       break;
-    case '+':
-      currentOperationScreen.textContent = add(a,b);
+    case "+":
+      currentOperationScreen.textContent = add(a, b);
       break;
-    case '-':
-      currentOperationScreen.textContent = subtract(a,b);
+    case "-":
+      currentOperationScreen.textContent = subtract(a, b);
       break;
-    case '/':
+    case "/":
       if (b === 0) {
         currentOperationScreen.textContent = "Cant divide by 0";
         clear();
       }
-      currentOperationScreen.textContent = divide(a,b);
+      currentOperationScreen.textContent = divide(a, b);
       break;
     default:
       break;
