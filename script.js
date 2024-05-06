@@ -1,5 +1,7 @@
-let numA = 0;
-let numB = 0;
+let firstOperand = '';
+let secondOperand = '';
+let currentOperation = null;
+let shouldResetScreen = false;
 
 const numberButtons = document.querySelectorAll("[data-number]");
 const opeartorButtons = document.querySelectorAll("[data-operator]");
@@ -7,19 +9,23 @@ const equalsButton = document.getElementById("equals-button");
 const pointButton = document.getElementById("point-button");
 const deleteButton = document.getElementById("del-button");
 const clearButton = document.getElementById("clear-button");
+const currentOpeartionScreen = document.getElementById('calculator-screen')
 
-function add(numA, numB) {
-  return numA + numB;
-}
+equalsButton.addEventListener("click", evaluate);
+clearButton.addEventListener("click", clear);
+deleteButton.addEventListener("click", deleteNumber);
+pointButton.addEventListener("click", appendPoint);
 
-function subtract(numA, numB) {
-  return numA - numB;
-}
+numberButtons.forEach((button) =>
+  button.addEventListener("click", () => appendNumber(button.textContent))
+);
 
-function multiply(numA, numB) {
-  return numA * numB;
-}
+opeartorButtons.forEach((button) =>
+  button.addEventListener('click', () => setOperation(button.textContent))
+);
 
-function divide(numA, numB) {
-  return numA / numB;
+function appendNumber(number) {
+  if(currentOpeartionScreen.textContent === '0' || shouldResetScreen)
+    resetScreen()
+  currentOperationScreen.textContent += number;
 }
