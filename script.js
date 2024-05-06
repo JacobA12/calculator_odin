@@ -1,7 +1,6 @@
 let firstOperand = "";
 let secondOperand = "";
 let currentOperation = null;
-let shouldResetScreen = false;
 
 const numberButtons = document.querySelectorAll("[data-number]");
 const opeartorButtons = document.querySelectorAll("[data-operator]");
@@ -12,7 +11,6 @@ const clearButton = document.getElementById("clear-button");
 const currentOperationScreen = document.getElementById(
   "currentOpeartionScreen"
 );
-const lastOperationScreen = document.getElementById("lastOperationScreen");
 
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
@@ -27,31 +25,26 @@ opeartorButtons.forEach((button) =>
 );
 
 function appendNumber(number) {
-  if (currentOpeartionScreen.textContent === "0" || shouldResetScreen)
-    resetScreen();
   currentOperationScreen.textContent += number;
 }
 
-function resetScreen() {
-  currentOperationScreen.textContent = "";
-  shouldResetScreen = false;
+function appendPoint() {
+  if (currentOpeartionScreen.textContent.toString.contains('.')) {
+    return;
+  }
+  currentOperationScreen.textContent += '.';
 }
 
-function clear() {
-  currentOperationScreen.textContent = "0";
-  lastOperationScreen.textContent = "";
-  firstOperand = "";
-  secondOperand = "";
-  currentOperation = null;
+function clear(){
+  currentOperationScreen.textContent = '0';
 }
 
-function appendPoint() {}
-
-function deleteNumber() {}
-
-function setOperation() {}
-
-function evaluate() {}
+function deleteNumber(){
+  if (currentOperationScreen.textContent !== '0') {
+    currentOperationScreen.textContent = currentOperationScreen.textContent.toString().slice(0, -1);
+  }
+  return;
+}
 
 function roundResult(number) {}
 
