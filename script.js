@@ -15,7 +15,7 @@ const currentOperationScreen = document.getElementById(
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 pointButton.addEventListener("click", appendPoint);
-equalsButton.addEventListener("click");
+equalsButton.addEventListener("click", operate);
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -63,19 +63,19 @@ function deleteNumber() {
 function roundResult(number) {}
 
 function add(a, b) {
-  return a + b;
+  return Number(a) + Number(b);
 }
 
 function subtract(a, b) {
-  return a - b;
+  return Number(a) - Number(b);
 }
 
 function multiply(a, b) {
-  return a * b;
+  return Number(a) * Number(b);
 }
 
 function divide(a, b) {
-  return a / b;
+  return Number(a) / Number(b);
 }
 
 function operate() {
@@ -87,20 +87,32 @@ function operate() {
 
   switch (currentOperation) {
     case "*":
-      currentOperationScreen.textContent = multiply(firstOperand, b);
+      currentOperationScreen.textContent = multiply(
+        firstOperand,
+        secondOperand
+      );
+      currentOperation = null;
       break;
     case "+":
-      currentOperationScreen.textContent = add(firstOperand, b);
+      currentOperationScreen.textContent = add(firstOperand, secondOperand);
+      currentOperation = null;
+
       break;
     case "-":
-      currentOperationScreen.textContent = subtract(firstOperand, b);
+      currentOperationScreen.textContent = subtract(
+        firstOperand,
+        secondOperand
+      );
+      currentOperation = null;
+
       break;
     case "/":
-      if (b === 0) {
+      if (secondOperand === 0) {
         currentOperationScreen.textContent = "Cant divide by 0";
         clear();
       }
-      currentOperationScreen.textContent = divide(a, b);
+      currentOperationScreen.textContent = divide(firstOperand, secondOperand);
+      currentOperation = null;
       break;
     default:
       break;
