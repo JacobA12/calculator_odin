@@ -9,9 +9,9 @@ const equalsButton = document.getElementById("equals-button");
 const pointButton = document.getElementById("point-button");
 const deleteButton = document.getElementById("del-button");
 const clearButton = document.getElementById("clear-button");
-const currentOpeartionScreen = document.getElementById('calculator-screen')
+const currentOperationScreen = document.getElementById('currentOpeartionScreen');
+const lastOperationScreen = document.getElementById('lastOperationScreen')
 
-equalsButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 pointButton.addEventListener("click", appendPoint);
@@ -28,4 +28,9 @@ function appendNumber(number) {
   if(currentOpeartionScreen.textContent === '0' || shouldResetScreen)
     resetScreen()
   currentOperationScreen.textContent += number;
+}
+
+function resetScreen(){
+  currentOperationScreen.textContent = '';
+  shouldResetScreen = false;
 }
