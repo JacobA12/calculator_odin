@@ -29,7 +29,7 @@ function appendNumber(number) {
 }
 
 function appendPoint() {
-  if (currentOpeartionScreen.textContent.toString.contains('.')) {
+  if (currentOperationScreen.textContent.toString().includes('.')) {
     return;
   }
   currentOperationScreen.textContent += '.';
